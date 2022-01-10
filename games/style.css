@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+}
+.container {
+    width: 100%;
+}
+.round {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    top: 30px;
+}
+.round span {
+    font-size: 20px;
+    color: #e62649;
+    font-weight: 700;
+    margin-right: 10px;
+}
+header {
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+header ul {
+    width: 72%;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    position: relative;
+}
+.result li {
+    width: 25%;
+    list-style: none;
+    display: inline-block;
+}
+.result li span {
+    font-size: 19px;
+    font-weight: 500;
+}
+.result .result-number {
+    color: #000;
+}
+
+.body {
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.body ul {
+    width: 85%;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    position: relative;
+}
+.body-result li {
+    width: 33%;
+    list-style: none;
+    display: inline-block;
+}
+.body-result-content {
+    border: 1px solid #c4c4c4;
+}
+
+.result-img {
+    padding: 70px 0;
+    width: 100%;
+}
+.btns {
+    margin: 20px auto;
+    align-items: center;
+    justify-content: center;
+}
+.btns button {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+}
+.btns img {
+    width: 100%;
+}
+.rounds-result span {
+    font-size: 30px;
+}
