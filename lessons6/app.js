@@ -454,7 +454,27 @@ openBtn = document.querySelector(".toggle-keyboard");
 openBtn.addEventListener("click", function(e) {
     container.classList.toggle("open");
 });
-
+keyboard = keyboardEng
+engRu = false
+langElement = document.querySelector(".language-keyboard");
+langElement.addEventListener("click", function(e) {
+    if(engRu == false) {
+        langElement.textContent = "Russian"
+        engRu = true
+        keyboard = keyboardRu
+        init()
+        keyClick()
+        commandClick()
+    } else if (engRu == true) {
+        langElement.textContent = "English"
+        engRu = false
+        keyboard = keyboardEng
+        init()
+        keyClick()
+        commandClick()
+    }
+    console.log(true)
+})
 
 
 
