@@ -1,7 +1,7 @@
 let capslock = false
 let shift = false
-
-let keyboard = {
+let isLowerCased = false
+let keyboardEng = {
     first_line: [
     {
     symbol: '`',
@@ -176,7 +176,7 @@ let keyboard = {
     },
     ],
     forth_line: [
-        {
+    {
     symbol: 'z',
     shift: 'Z',
     isLetter: true
@@ -225,17 +225,245 @@ let keyboard = {
     },
     ]
 }    
+let keyboardRu = {
+    first_line: [
+    {
+    symbol: '`',
+    shift: '~'
+    },
+    {
+    symbol: '1',
+    shift: '!'
+    },
+    {
+    symbol: '2',
+    shift: '@'
+    },
+    {
+    symbol: '3',
+    shift: '#'
+    },
+    {
+    symbol: '4',
+    shift: '$'
+    },
+    {
+    symbol: '5',
+    shift: '%'
+    },
+    {
+    symbol: '6',
+    shift: '^'
+    },
+    {
+    symbol: '7',
+    shift: '&'
+    },
+    {
+    symbol: '8',
+    shift: '*'
+    },
+    {
+    symbol: '9',
+    shift: '('
+    },
+    {
+    symbol: '0',
+    shift: ')'
+    },
+    {
+    symbol: '-',
+    shift: '_'
+    },
+    {
+    symbol: '=',
+    shift: '+'
+    },
+    ],
+    second_line: [
+    {
+    symbol: 'й',
+    shift: 'Й',
+    isLetter: true
+    },
+    {
+    symbol: 'ц',
+    shift: 'Ц',
+    isLetter: true
+    },
+    {
+    symbol: 'у',
+    shift: 'У',
+    isLetter: true
+    },
+    {
+    symbol: 'к',
+    shift: 'К',
+    isLetter: true
+    },
+    {
+    symbol: 'е',
+    shift: 'Е',
+    isLetter: true
+    },
+    {
+    symbol: 'н',
+    shift: 'Н',
+    isLetter: true
+    },
+    {
+    symbol: 'г',
+    shift: 'Г',
+    isLetter: true
+    },
+    {
+    symbol: 'ш',
+    shift: 'Ш',
+    isLetter: true
+    },
+    {
+    symbol: 'щ',
+    shift: 'Щ',
+    isLetter: true
+    },
+    {
+    symbol: 'з',
+    shift: 'З',
+    isLetter: true
+    },
+    {
+    symbol: 'х',
+    shift: 'Х'
+    },
+    {
+    symbol: 'ъ',
+    shift: 'Ъ'
+    },  
+    {
+    symbol: '\\',
+    shift: '/'
+    },        
+    ],
+    third_line: [
+    {
+    symbol: 'ф',
+    shift: 'Ф',
+    isLetter: true
+    },
+    {
+    symbol: 'ы',
+    shift: 'Ы',
+    isLetter: true
+    },
+    {
+    symbol: 'в',
+    shift: 'В',
+    isLetter: true
+    },
+    {
+    symbol: 'а',
+    shift: 'А',
+    isLetter: true
+    },
+    {
+    symbol: 'п',
+    shift: 'П',
+    isLetter: true
+    },
+    {
+    symbol: 'р',
+    shift: 'Р',
+    isLetter: true
+    },
+    {
+    symbol: 'о',
+    shift: 'О',
+    isLetter: true
+    },
+    {
+    symbol: 'л',
+    shift: 'Л',
+    isLetter: true
+    },
+    {
+    symbol: 'д',
+    shift: 'Д',
+    isLetter: true
+    },
+    {
+    symbol: 'ж',
+    shift: 'Ж'
+    },
+    {
+    symbol: 'э',
+    shift: 'Э'
+    },
+    ],
+    forth_line: [
+    {
+    symbol: 'я',
+    shift: 'Я',
+    isLetter: true
+    },
+    {
+    symbol: 'ч',
+    shift: 'Ч',
+    isLetter: true
+    },
+    {
+    symbol: 'с',
+    shift: 'С',
+    isLetter: true
+    },
+    {
+    symbol: 'м',
+    shift: 'М',
+    isLetter: true
+    },
+    {
+    symbol: 'и',
+    shift: 'И',
+    isLetter: true
+    },
+    {
+    symbol: 'т',
+    shift: 'Т',
+    isLetter: true
+    },
+    {
+    symbol: 'ь',
+    shift: 'Ь',
+    isLetter: true
+    },
+    {
+    symbol: 'б',
+    shift: 'Б'
+    },
+    {
+    symbol: 'ю',
+    shift: 'Ю'
+    },
+    {
+    symbol: '.',
+    shift: ','
+    },
+    ]
+}    
 container = document.querySelector(".container");
 openBtn = document.querySelector(".toggle-keyboard");
 openBtn.addEventListener("click", function(e) {
     container.classList.toggle("open");
 });
 
+
+
+
 firstLineElement = document.querySelector('.first-line');
 secondLineElement = document.querySelector('.second-line');
 thirdLineElement = document.querySelector('.third-line');
 forthLineElement = document.querySelector('.forth-line');
 
+let shiftBtn
 
 init();
 
@@ -248,9 +476,9 @@ function init() {
     // first line
     keyboard.first_line.forEach(function(element) {
         if(capslock) {
-            firstLineElement.innerHTML += `<span class="button button-style">${!element.isLetter ? element.symbol : element.shift}</span>`;
+            firstLineElement.innerHTML += `<span class="button button-style">${element.isLetter ? element.shift : element.symbol}</span>`;
         } else {
-            firstLineElement.innerHTML += `<span class="button button-style">${!shift ? element.symbol : element.shift}</span>`;
+            firstLineElement.innerHTML += `<span class="button button-style">${shift ? element.shift : element.symbol}</span>`;
         }
     });
 
@@ -262,9 +490,9 @@ function init() {
     secondLineElement.innerHTML += `<span class="button-style tab">Tab</span>`
      keyboard.second_line.forEach(function(element) {
         if(capslock) {
-            secondLineElement.innerHTML += `<span class="button button-style">${!element.isLetter ? element.symbol : element.shift}</span>`;
+            secondLineElement.innerHTML += `<span class="button button-style">${element.isLetter ? element.shift : element.symbol}</span>`;
         } else {
-            secondLineElement.innerHTML += `<span class="button button-style">${!shift ? element.symbol : element.shift}</span>`;
+            secondLineElement.innerHTML += `<span class="button button-style">${shift ? element.shift : element.symbol}</span>`;
         }
     });
 
@@ -274,9 +502,9 @@ function init() {
 
     keyboard.third_line.forEach(function(element) {
         if(capslock) {
-            thirdLineElement.innerHTML += `<span class="button button-style">${!element.isLetter ? element.symbol : element.shift}</span>`;
+            thirdLineElement.innerHTML += `<span class="button button-style">${element.isLetter ? element.shift : element.symbol}</span>`;
         } else {
-            thirdLineElement.innerHTML += `<span class="button button-style">${!shift ? element.symbol : element.shift}</span>`;
+            thirdLineElement.innerHTML += `<span class="button button-style">${shift ? element.shift : element.symbol}</span>`;
         }    });
     thirdLineElement.innerHTML += `<span class="button-style enter">Enter</span>`
     
@@ -285,28 +513,39 @@ function init() {
 
     keyboard.forth_line.forEach(function(element) {
         if(capslock) {
-            forthLineElement.innerHTML += `<span class="button button-style">${!element.isLetter ? element.symbol : element.shift}</span>`;
+            forthLineElement.innerHTML += `<span class="button button-style">${element.isLetter ? element.shift : element.symbol}</span>`;
         } else {
-            forthLineElement.innerHTML += `<span class="button button-style">${!shift ? element.symbol : element.shift}</span>`;
+            forthLineElement.innerHTML += `<span class="button button-style">${shift ? element.shift : element.symbol}</span>`;
         }    
     });
     forthLineElement.innerHTML += `<span class="button-style shift">Shift</span>`;
+
+    shiftBtn = document.querySelectorAll(".shift")
 };
+
+
 // 
 let displayElement = document.querySelector(".display");
-
 
 function keyClick() {
     let btns = document.querySelectorAll("span.button");
     
-
     btns.forEach(function(btn) {
         btn.addEventListener("click", function(e) {
+            
             if(!capslock) {
-                displayElement.innerHTML += btn.textContent;
-            } else {
-                displayElement.innerHTML += btn.textContent.toUpperCase();
-            }
+				displayElement.innerHTML += btn.textContent
+			} else {
+				displayElement.innerHTML += btn.textContent
+			}              
+
+            capslock = isLowerCased ? true : capslock
+
+            isLowerCased = false
+
+            init();
+            keyClick();
+            commandClick();
         });
     });
 };
@@ -314,38 +553,45 @@ keyClick();
 
 function commandClick() {
     let backspaceBtn = document.querySelector(".backspace");
-    backspaceBtn.addEventListener("click", function(btn) {
+    backspaceBtn.addEventListener("click", function(e) {
         let value = displayElement.innerHTML.split("");
-        value.pop();
+        let popedValue = value.pop()
         value = value.join("");
         displayElement.innerHTML = value
     })
     
     let tabBtn = document.querySelector(".tab");
     tabBtn.addEventListener("click", function(e) {
-        displayElement.innerHTML += "\t"
+        displayElement.innerHTML += "&emsp;"
     });
     
     let enterBtn = document.querySelector(".enter");
     enterBtn.addEventListener("click", function(e) {
         displayElement.innerHTML += `<br />`
     });
-    capslock = document.querySelector(".capsLock");
-    capslock.addEventListener("click", function(e) {
-        capslock = !capslock;
+    capslockBtn = document.querySelector(".capsLock");
+    capslockBtn.addEventListener("click", function(e) {
+        capslock = !capslock
         init();
         keyClick();
-        commandClick()
+        commandClick();
     })
+
+    let spaceBtn = document.querySelector(".space") 
+	spaceBtn.addEventListener("click", function(e) {
+		displayElement.textContent += " "
+	})
 }
 commandClick()
 
 document.body.addEventListener("click", function(e) {
     if(e.target.classList.contains("shift")) {
-        shift = !shift;
+        shift = capslock ? false : !shift
+        isLowerCased = capslock ? true : false
+        capslock = isLowerCased ? false : capslock
         init();
         keyClick();
-        commandClick()
+        commandClick();
     }
 })
 
